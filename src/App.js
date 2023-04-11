@@ -1,25 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+import { getData, getConfig } from "./redux/data-reducer"
+import { connect } from "react-redux"
+import Market from './components/market/Market';
 
-function App() {
+function App(props) {
+    props.getData()
+    props.getConfig()
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Market data={props.data} config={props.config}/>
     </div>
   );
 }
 
-export default App;
+let mapStateToProps = (state) => ({
+    data: state.data.data,
+    config: state.data.config
+})
+
+export default connect(mapStateToProps, {getData, getConfig})(App)
