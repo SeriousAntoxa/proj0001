@@ -43,15 +43,15 @@ export let setConfig = (config) => {
 }
 
 export const getData = () => {
-    return (dispatch) => {
-        let data = dataAPI.getData()
+    return async (dispatch) => {
+        let data = await dataAPI.getData()
         dispatch(setData(data))
     }
 }
 
 export const getConfig = () => {
-    return (dispatch) => {
-        let config = dataAPI.getConfig()
+    return async (dispatch) => {
+        let config = await dataAPI.getConfig()
         dispatch(setConfig(config))
     }
 }

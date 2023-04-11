@@ -1,22 +1,23 @@
-import './App.css';
+import "./App.css"
 import { getData, getConfig } from "./redux/data-reducer"
 import { connect } from "react-redux"
-import Market from './components/market/Market';
+import Market from "./components/market/Market"
+import { useEffect } from "react"
 
 function App(props) {
     props.getData()
     props.getConfig()
 
-  return (
-    <div className="App">
-        <Market data={props.data} config={props.config}/>
-    </div>
-  );
+    if (!!props.data) return (
+        <div className="App">
+            <Market data={props.data} config={props.config} />
+        </div>
+    )
 }
 
 let mapStateToProps = (state) => ({
     data: state.data.data,
-    config: state.data.config
+    config: state.data.config,
 })
 
-export default connect(mapStateToProps, {getData, getConfig})(App)
+export default connect(mapStateToProps, { getData, getConfig })(App)
