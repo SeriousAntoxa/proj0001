@@ -2,7 +2,6 @@ import "./App.css"
 import { getData, getConfig } from "./redux/data-reducer"
 import { connect } from "react-redux"
 import Market from "./components/market/Market"
-import { useEffect } from "react"
 
 function App(props) {
     props.getData()

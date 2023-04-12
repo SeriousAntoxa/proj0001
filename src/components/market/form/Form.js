@@ -2,24 +2,35 @@ import { useState } from "react"
 import { Field, reduxForm } from "redux-form"
 
 function Form(props) {
-    let [listMaterial, setListMaterial] = useState('')
-    let selects = props.listMaterials.map((i) => {
+    let [listMaterial, setListMaterial] = useState(props.materials[0].key)
+
+    let selectsListMaterial = props.materials.map((i) => {
         return (
             <label>
                 <Field
                     name="material"
                     component="input"
                     type="radio"
-                    value={i}
-                    onClick={() => setListMaterial(i)}
+                    value={i.key}
+                    checked={listMaterial === i.key}
+                    onClick={() => setListMaterial(i.key)}
                 />
-                {i}
+                {i.name}
             </label>
         )
     })
-    let options = props.lists
-    .filter((i) => i.material === listMaterial)
-    .map((j) => {
+
+    let optionsList = props.lists
+        .filter((i) => i.material === listMaterial)
+        .map((j) => {
+            return <option value={j.name}>{j.name}</option>
+        })
+
+    let optionsPipe = props.pipes.map((j) => {
+        return <option value={j.name}>{j.name}</option>
+    })
+
+    let optionsFrame = props.frame.map((j) => {
         return <option value={j.name}>{j.name}</option>
     })
 
@@ -29,10 +40,10 @@ function Form(props) {
                 <label>Ширина</label>
                 <div>
                     <Field
-                        name="wight"
+                        name="width"
                         component="input"
                         type="text"
-                        placeholder="wight"
+                        placeholder="width"
                     />
                 </div>
             </div>
@@ -50,22 +61,27 @@ function Form(props) {
             <div>
                 <label>Материал листа</label>
                 <div>
-                {selects}
+                    {selectsListMaterial}
                     <div>
-                        <Field name="selectMaterial" component="select">
-                            {options}
+                        <Field name="selectList" component="select">
+                            {optionsList}
                         </Field>
                     </div>
                 </div>
             </div>
             <div>
+                <label>Труба</label>
+                <div>
+                    <Field name="selectPipe" component="select">
+                        {optionsPipe}
+                    </Field>
+                </div>
+            </div>
+            <div>
                 <label>Выбор прочности</label>
                 <div>
-                    <Field name="selectProperty" component="select">
-                        <option></option>
-                        <option value="lite">легкая</option>
-                        <option value="standart">стандартная</option>
-                        <option value="strong">усиленная</option>
+                    <Field name="selectFrame" component="select">
+                        {optionsFrame}
                     </Field>
                 </div>
             </div>
