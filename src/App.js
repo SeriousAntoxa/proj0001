@@ -4,11 +4,13 @@ import { getItems } from "./redux/items-reducer"
 import { connect } from "react-redux"
 import Market from "./components/market/Market"
 import { useEffect, useState } from "react"
+import Basket from "./components/basket/Basket"
 
 function App(props) {
 
     let [isData, setIsData] = useState(props.isData)
     let [isConfig, setIsConfig] = useState(props.isConfig)
+    let [isBasket, setIsBasket] = useState(props.isBasket)
 
     useEffect(() => {
         props.getData()
@@ -21,6 +23,10 @@ function App(props) {
         setIsConfig(props.isConfig)
     }, [props.isData, props.isConfig])
 
+    useEffect(() => {
+        setIsBasket(props.isBasket)
+    }, [props.isBasket])
+
     if (isData && isConfig) {
         return (
             <div className="App">
@@ -28,6 +34,7 @@ function App(props) {
                     data={props.data}
                     config={props.config}
                 />
+                {isBasket ? <Basket /> : <></>}
             </div>
         )
     }
@@ -38,6 +45,7 @@ let mapStateToProps = (state) => ({
     config: state.data.config,
     isData: state.data.isData,
     isConfig: state.data.isConfig,
+    isBasket: state.basket.isBasket,
 })
 
 export default connect(mapStateToProps, { getData, getConfig, getItems })(App)

@@ -1,9 +1,21 @@
 import { useState, useEffect } from "react"
 import Table from "react-bootstrap/Table"
+import { connect } from "react-redux"
+import { getBasket } from "./../../../redux/basket-reducer"
 
 function Result(props) {
 
-    let result = props.result
+    let [result, setResult] = useState(props.result)
+
+    useEffect(()=>{
+        setResult(props.result)
+    },[props.result])
+
+
+    let addResultInBasket = ({square, area, list, pipe, fix, allSum}) => {
+
+        props.getBasket({square, area, list, pipe, fix, allSum})
+    }
 
         return (
             <div>
@@ -47,8 +59,17 @@ function Result(props) {
                 <div>
                     <p>Итого: {result.allSum}</p>
                 </div>
+                <button onClick={()=>addResultInBasket(result)}>Добавить в корзину</button>
             </div>
         )
 }
 
-export default Result
+let MapStateToProps = (state) => ({
+    result: state.result,
+})
+
+let MarketRedux = connect(MapStateToProps, {
+    getBasket,
+})(Result)
+
+export default MarketRedux

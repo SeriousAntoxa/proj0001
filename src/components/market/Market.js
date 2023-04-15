@@ -2,8 +2,13 @@ import { useEffect, useState } from "react"
 import { connect } from "react-redux"
 import FormRedux from "./form/Form"
 import Result from "./result/Result"
-import { getDataItems, getConfigItems, getItems } from "./../../redux/items-reducer"
+import {
+    getDataItems,
+    getConfigItems,
+    getItems,
+} from "./../../redux/items-reducer"
 import { getResult } from "./../../redux/result-reducer"
+import { getBasket } from "./../../redux/basket-reducer"
 import calculation from "./calculation"
 
 function Market(props) {
@@ -15,7 +20,7 @@ function Market(props) {
         let listData = findItem(props.lists, form.selectList)
         let pipeData = findItem(props.pipes, form.selectPipe)
         let frameData = findItem(props.frame, form.selectFrame)
-        
+
         let result = calculation(
             form,
             listData,
@@ -26,7 +31,6 @@ function Market(props) {
         )
 
         props.getResult(result)
-
     }
 
     return (
@@ -40,7 +44,7 @@ function Market(props) {
                 size={props.size}
                 isItems={props.isItems}
             />
-            <Result result={props.result} />
+            <Result />
         </div>
     )
 }
@@ -61,7 +65,8 @@ let MarketRedux = connect(MapStateToProps, {
     getDataItems,
     getConfigItems,
     getResult,
-    getItems
+    getItems,
+    getBasket,
 })(Market)
 
 export default MarketRedux
