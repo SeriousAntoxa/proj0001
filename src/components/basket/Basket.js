@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react"
 import { clearBasket } from "./../../redux/basket-reducer"
 import { connect } from "react-redux"
+import { Button, Table } from "react-bootstrap"
 
 function Basket(props) {
-    let [basket, setBasket] = useState([])
-    useEffect(() => {
-        setBasket(props.basket)
-    }, [basket])
-
     let [basketSum, setBasketSum] = useState(0)
     let [tBodyItems, setTBodyItems] = useState([])
 
@@ -31,25 +27,25 @@ function Basket(props) {
     return (
         <div>
             <h2>Корзина</h2>
-            <table striped bordered hover>
+            <Table striped bordered hover>
                 <thead>
                     <tr>
                         <th>Номер</th>
-                        <th colspan="3">Наименование</th>
+                        <th colSpan="3">Наименование</th>
                         <th>Сумма</th>
                     </tr>
                 </thead>
                 <tbody>{tBodyItems}</tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="4">Итого</td>
+                        <td colSpan="4">Итого</td>
                         <td>{basketSum}</td>
                     </tr>
                 </tfoot>
-            </table>
-            <button onClick={() => props.clearBasket()}>
+            </Table>
+            <Button variant="danger" onClick={() => props.clearBasket()}>
                 Очистить корзину
-            </button>
+            </Button>
         </div>
     )
 }
