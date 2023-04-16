@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { clearBasket } from "./../../redux/basket-reducer"
 import { connect } from "react-redux"
 import { Button, Table } from "react-bootstrap"
+import { mathFloor } from "../market/calculation"
 
 function Basket(props) {
     let [basketSum, setBasketSum] = useState(0)
@@ -10,7 +11,7 @@ function Basket(props) {
     useEffect(() => {
         setTBodyItems(
             props.basket.map((i, ind) => {
-                setBasketSum(basketSum + i.allSum)
+                setBasketSum(mathFloor(basketSum + i.allSum))
                 return (
                     <tr>
                         <td>{ind + 1}</td>
@@ -43,7 +44,14 @@ function Basket(props) {
                     </tr>
                 </tfoot>
             </Table>
-            <Button variant="danger" onClick={() => props.clearBasket()}>
+            <Button
+                variant="danger"
+                onClick={() => {
+                    setBasketSum(0)
+                    return props.clearBasket()
+                }}
+                disabled={props.basket.length === 0}
+            >
                 Очистить корзину
             </Button>
         </div>

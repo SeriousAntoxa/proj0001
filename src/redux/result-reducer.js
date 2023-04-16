@@ -1,4 +1,4 @@
-import { getBasket } from "./basket-reducer"
+import { setBasketItem } from "./basket-reducer"
 
 const SET_SQUARE = "SET-SQUARE"
 const SET_AREA = "SET-AREA"
@@ -116,6 +116,5 @@ export const getResult = ({square, area, listResult, pipeResult, fixResult, allS
         dispatch(setFix(fixResult))
         dispatch(setAllSum(allSum))
         dispatch(setIsResult(true))
-        //dispatch(getBasket({square, area, listResult, pipeResult, fixResult, allSum}))
     }
 }

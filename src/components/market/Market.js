@@ -7,7 +7,7 @@ import {
     getItems,
 } from "./../../redux/items-reducer"
 import { getResult } from "./../../redux/result-reducer"
-import { getBasket } from "./../../redux/basket-reducer"
+import { setBasketItem } from "./../../redux/basket-reducer"
 import calculation from "./calculation"
 
 function Market(props) {
@@ -65,7 +65,7 @@ let MarketRedux = connect(MapStateToProps, {
     getConfigItems,
     getResult,
     getItems,
-    getBasket,
+    setBasketItem,
 })(Market)
 
 export default MarketRedux

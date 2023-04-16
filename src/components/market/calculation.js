@@ -1,4 +1,4 @@
-let mathFloor = (value) => {
+export let mathFloor = (value) => {
     return Math.floor(value * 100) / 100
 }
 
@@ -69,7 +69,7 @@ let calculation = (form, listData, pipeData, frameData, fixInfo, fixConfig) => {
     let sumPipe = mathFloor(countPipe * pipeData.price)
     let sumList = mathFloor(countList * listData.price)
     let sumFix = mathFloor(fixCount * fixMainInformation.price)
-    let allSum = sumPipe + sumList + sumFix
+    let allSum = mathFloor(sumPipe + sumList + sumFix)
 
     //Формирование объектов для выдачи в результатах
     let listResult = {

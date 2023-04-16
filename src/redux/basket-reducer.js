@@ -50,7 +50,7 @@ export let setClearBasket = () => {
     }
 }
 
-export const getBasket = (result) => {
+export const setBasketItem = (result) => {
     return (dispatch) => {
         dispatch(setIsBasket())
         dispatch(setBasket(result))
