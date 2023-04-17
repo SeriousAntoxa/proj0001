@@ -24,13 +24,13 @@ function App(props) {
 
     if (isData && isConfig) {
         return (
-            <div className="App">
+            <main className="App">
                 <Market
                     data={props.data}
                     config={props.config}
                 />
                 <Basket /> 
-            </div>
+            </main>
         )
     }
 }

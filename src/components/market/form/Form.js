@@ -1,6 +1,7 @@
-import { Button, Form } from "react-bootstrap"
+import { Button, Form as Form } from "react-bootstrap"
 import { useEffect, useState } from "react"
 import { Field, reduxForm } from "redux-form"
+import "./FormData.css"
 
 function FormData(props) {
     // валидация формы
@@ -85,8 +86,9 @@ function FormData(props) {
         setSelectsListMaterial(
             props.materials.map((i) => {
                 return (
-                    <label>
+                    <label className="form-data__label">
                         <Field
+                            className="radio-group__input"
                             name="material"
                             component="input"
                             type="radio"
@@ -140,21 +142,22 @@ function FormData(props) {
     }, [props.frame])
 
     return (
-        <div>
+        <div className="form-data">
             <h2>Введите данные</h2>
 
-            <Form onSubmit={props.handleSubmit}>
-                <Form.Group className="mb-3">
-                    <Form.Label>Ширина</Form.Label>
+            <form onSubmit={props.handleSubmit}>
+                <div className="form-data__group">
+                    <label className="form-data__label">Ширина</label>
                     {widthDirty && widthError && (
                         <div>
-                            <Form.Text style={{ color: "red" }}>
+                            <span className="form-data__text_error">
                                 {widthError}
-                            </Form.Text>
+                            </span>
                         </div>
                     )}
                     <div>
                         <Field
+                            className="form-data__input"
                             name="width"
                             component="input"
                             type="text"
@@ -162,18 +165,19 @@ function FormData(props) {
                             onBlur={(e) => blurHandler(e)}
                         />
                     </div>
-                </Form.Group>
-                <Form.Group className="mb-3">
-                    <Form.Label>Длина</Form.Label>
+                </div>
+                <div className="form-data__group">
+                    <label className="form-data__label">Длина</label>
                     {heightDirty && heightError && (
                         <div>
-                            <Form.Text style={{ color: "red" }}>
+                            <span className="form-data__text_error">
                                 {heightError}
-                            </Form.Text>
+                            </span>
                         </div>
                     )}
                     <div>
                         <Field
+                            className="form-data__input"
                             name="height"
                             component="input"
                             type="text"
@@ -181,22 +185,27 @@ function FormData(props) {
                             onBlur={(e) => blurHandler(e)}
                         />
                     </div>
-                </Form.Group>
-                <Form.Group className="mb-3">
-                    <Form.Label>Материал листа</Form.Label>
-                    <div>{selectsListMaterial}</div>
-                </Form.Group>
-                <Form.Group className="mb-3">
-                    <Form.Label>Листы</Form.Label>
+                </div>
+
+                <div className="form-data__group">
+                    <label className="form-data__label">Материал листа</label>
+                    <div className="form-data__radio-group">
+                        {selectsListMaterial}
+                    </div>
+                </div>
+
+                <div className="form-data__group">
+                    <label className="form-data__label">Листы</label>
                     {!selectListEnable && (
                         <div>
-                            <Form.Text style={{ color: "red" }}>
+                            <span className="form-data__text_error">
                                 Выберите значение
-                            </Form.Text>
+                            </span>
                         </div>
                     )}
                     <div>
                         <Field
+                            className="form-data__input"
                             name="selectList"
                             component="select"
                             onChange={() => setSelectListEnable(true)}
@@ -205,19 +214,20 @@ function FormData(props) {
                             {optionsList}
                         </Field>
                     </div>
-                </Form.Group>
+                </div>
 
-                <Form.Group className="mb-3">
-                    <Form.Label>Трубы</Form.Label>
+                <div className="form-data__group">
+                    <label className="form-data__label">Трубы</label>
                     {!selectPipeEnable && (
                         <div>
-                            <Form.Text style={{ color: "red" }}>
+                            <span className="form-data__text_error">
                                 Выберите значение
-                            </Form.Text>
+                            </span>
                         </div>
                     )}
                     <div>
                         <Field
+                            className="form-data__input"
                             name="selectPipe"
                             component="select"
                             onChange={() => setSelectPipeEnable(true)}
@@ -226,18 +236,19 @@ function FormData(props) {
                             {optionsPipe}
                         </Field>
                     </div>
-                </Form.Group>
-                <Form.Group className="mb-3">
-                    <Form.Label>Выбор прочности</Form.Label>
+                </div>
+                <div className="form-data__group">
+                    <label className="form-data__label">Выбор прочности</label>
                     {!selectFrameEnable && (
                         <div>
-                            <Form.Text style={{ color: "red" }}>
+                            <span className="form-data__text_error">
                                 Выберите значение
-                            </Form.Text>
+                            </span>
                         </div>
                     )}
                     <div>
                         <Field
+                            className="form-data__input"
                             name="selectFrame"
                             component="select"
                             onChange={() => setSelectFrameEnable(true)}
@@ -246,15 +257,24 @@ function FormData(props) {
                             {optionsFrame}
                         </Field>
                     </div>
-                </Form.Group>
-                <Button
-                    variant="primary"
-                    type="submit"
-                    disabled={buttonDisable}
-                >
-                    Расчет
-                </Button>
-            </Form>
+                </div>
+                <div className="form-data__group">
+                    {buttonDisable && (
+                        <div>
+                            <span className="form-data__text_error">
+                                Заполните все поля формы
+                            </span>
+                        </div>
+                    )}
+                    <Button
+                        variant="primary"
+                        type="submit"
+                        disabled={buttonDisable}
+                    >
+                        Расчет
+                    </Button>
+                </div>
+            </form>
         </div>
     )
 }

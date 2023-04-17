@@ -3,6 +3,7 @@ import { clearBasket } from "./../../redux/basket-reducer"
 import { connect } from "react-redux"
 import { Button, Table } from "react-bootstrap"
 import { mathFloor } from "../market/calculation"
+import "./Basket.css"
 
 function Basket(props) {
     let [basketSum, setBasketSum] = useState(0)
@@ -26,7 +27,7 @@ function Basket(props) {
     }, [props.basket])
 
     return (
-        <div>
+        <div className="basket">
             <h2>Корзина</h2>
             <Table striped bordered hover>
                 <thead>

@@ -3,6 +3,8 @@ import Table from "react-bootstrap/Table"
 import { connect } from "react-redux"
 import { setBasketItem } from "./../../../redux/basket-reducer"
 import { Button } from "react-bootstrap"
+import "./Result.css"
+
 
 function Result(props) {
     let [result, setResult] = useState(props.result)
@@ -16,7 +18,7 @@ function Result(props) {
     }
 
     return (
-        <div>
+        <div className="result">
             <h2>Результат</h2>
             <div>
                 <p>общая площадь: {`${result.square} м2`}</p>
